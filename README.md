@@ -2,7 +2,16 @@
 
 **Chat builds the boss. You survive it.** A playable 2D boss arena with community-proposed attacks, Codex-generated attack programs, and monsters that travel between participating Twitch channels.
 
+## Community features
+
+- **Chat powers:** during an active fight, viewers type `!shield`, `!heal`, or `!fury`. Each 12-second round counts one vote per Twitch user; a new command changes that user's vote. At least one vote is needed. Ties favor shield, then heal, then fury. The winner grants three seconds of invulnerability, restores one heart, or speeds up enemy projectiles for five seconds. Votes are discarded when a fight pauses, ends, changes run, or loses its broadcaster connection. Practice mode offers clearly labeled local power controls with a 12-second cooldown.
+- **Shareable boss challenges:** share a link containing the validated attack program, creator credit, difficulty, and power setting. Friends can accept the exact boss without an account. The payload stays in the URL fragment. Creator credit is supplied by the person sharing, not identity-verified.
+- **Three difficulties:** Chill, Standard, and Nightmare adjust enemy projectile speed and attack cadence. Settings lock during a fight.
+- **Run book and scorecards:** completed runs record time, accuracy, health, damage, dashes, power activations, and creator credit. Download a PNG scorecard. Personal bests compare only wins against the same boss program, difficulty, and power setting. These are local-device or companion-workshop records, not a verified global leaderboard.
+
 ## Deployment
+
+Live frontend: https://raidforge-five.vercel.app
 
 GitHub source: https://github.com/harrymakoni-netizen/Raidforge (public).
 
@@ -39,6 +48,7 @@ The hosted private Site serves the static practice app. The live Node companion 
 
 - `!forge Make missed shots come back at the player` — proposes a mutation (30-second cooldown per viewer).
 - `!vote 1` — votes for proposal #1. One vote per Twitch user per proposal, persisted across restarts.
+- `!shield`, `!heal`, `!fury` — vote for the next live-fight power. The broadcaster must enable Chat powers before starting.
 
 The broadcaster chooses which proposal to forge. Codex receives the proposal as untrusted creative input, generates a bounded JSON attack program, and returns it for preview. Generation does not change the equipped boss. Only **Equip mutation** activates it; **Restore previous mutation** rolls back.
 
@@ -74,6 +84,9 @@ The generator runs Codex in a temporary read-only workspace with shell tools dis
 - `server/index.js`: Express API, host authorization, WebSocket room updates and OBS frames.
 - `server/twitch.js`: OAuth, EventSub WebSocket subscriptions/reconnect, chat commands, raid notifications, token refresh.
 - `server/generate.js`: Codex SDK generation, output schema, limits, 180-second timeout.
+- `dist/challenges.js`: challenge-link validation, ruleset identity, run scoring and personal-best comparisons.
+- `dist/feature-ui.js`: audience controls, challenge sharing, run book, and PNG scorecard export.
+- `server/audience.js`: isolated voting rounds with unique-viewer votes, stale-connection checks, and power resolution.
 - `server/store.js`: atomic JSON state persistence under `data/` (ignored), votes, mutation snapshots, raid acceptance.
 - `.openai/hosting.json`: private Sites deployment of the static client.
 
@@ -86,9 +99,11 @@ npm test
 npm run check
 ```
 
+`node test/features-browser.mjs` checks challenge sharing/acceptance, a complete fight, scorecard downloads, run persistence, and power controls. `PUBLIC_URL=http://localhost:3002 node test/live-browser.mjs` tests the connected UI with a controlled generator.
+
 `node test/browser-check.mjs` exercises the actual browser flow against a running service and saves screenshots in `artifacts/`. It expects a Chromium binary at `/usr/bin/chromium`; adapt the executable path for your machine.
 
-Verified locally: attack bounds, one-vote enforcement, persistence, auth enforcement, generation/approval separation, cross-room generation rejection, raid acceptance, rollback, OBS frame relay, OAuth state rejection, desktop/mobile UI, keyboard fight/pause, and local handoff history.
+Verified locally: challenge round trips and malformed-input rejection, unique power votes and deterministic ties, stale/paused/preview power rejection, actual command-handler-to-WebSocket power delivery, personal-best separation, score calculation, and attack bounds, one-vote enforcement, persistence, auth enforcement, generation/approval separation, cross-room generation rejection, raid acceptance, rollback, OBS frame relay, OAuth state rejection, desktop/mobile UI, keyboard fight/pause, and local handoff history.
 
 **Not verified against live accounts:** Twitch OAuth/EventSub, real cross-channel raid, and authenticated Codex generation. No Twitch app credentials were provided. A real Codex SDK generation was attempted; the installed CLI reported a stale access token that could not be refreshed and requires sign-in again. The generation code reached authentication but a real output could not be verified. Automated tests inject a deterministic generator and controlled Twitch events, and do not claim those are live integrations.
 

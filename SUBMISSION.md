@@ -10,6 +10,10 @@ RAIDFORGE gives streamers a recurring live segment: propose, vote, forge, fight,
 
 When a streamer arms a handoff and raids another participating channel, the receiving streamer can accept the boss with its creator credit and accumulated raid history. The next community inherits the story and can add its own mutation.
 
+## What makes the demo stronger
+
+During a fight, chat can vote to save or sabotage the streamer with shield, healing, and fury powers. Viewer identity limits each round to one vote per person. Creator credit stays visible on the boss and appears on the result card. Streamers can send a playable challenge link with the exact boss and rules; personal bests and downloadable scorecards make the encounter worth replaying.
+
 ## How Codex was used
 
 This project was built in a Codex session, including the original Canvas goose artwork, game loop, responsive workshop UI, Twitch integration, server, validation, and tests. Runtime generation also uses the Codex SDK to create structured attack programs from selected viewer proposals. Runtime generations remain pending until the streamer approves them.
@@ -28,9 +32,9 @@ Primary build session ID: **retrieve with `/status` in the build session**.
 - 0:00–0:15 — Open on the actual fight, show the stream and chat. “Chat built this boss. Now I have to survive it.”
 - 0:15–0:45 — A real viewer types `!forge`; another votes. Select it in the workshop.
 - 0:45–1:10 — Show Codex producing the program. If generation is time-compressed, explicitly label elapsed time. Preview and equip the resulting attack.
-- 1:10–1:45 — Play a short fight and show creator credit plus the proposed behavior working.
+- 1:10–1:45 — Play a short fight. Have real viewers vote `!shield` or `!fury`; show the winning power changing the battle, then the result card with creator credit.
 - 1:45–2:15 — Arm a handoff; perform a real raid between two connected channels. Show the receiving streamer accepting the same boss and its history.
-- 2:15–2:35 — Briefly show the Codex build session, attack validation, and tests.
+- 2:15–2:35 — Share a boss challenge, show it opening with the same rules, then briefly show the Codex build session and attack-validation tests.
 - 2:35–2:45 — Close: “Your community’s imagination becomes another streamer’s boss fight.”
 
 ## Before submitting

@@ -15,7 +15,7 @@ For Twitch/Codex features, deploy the companion separately, configure Twitch app
 
 ## Verification
 
-- `npm test`: 8 passing tests.
+- `npm test`: 15 passing tests.
 - `npm run check`: JavaScript syntax checks passed.
 - Desktop and mobile browser flows passed during implementation.
 
