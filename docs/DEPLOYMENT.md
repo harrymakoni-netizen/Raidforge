@@ -1,22 +1,22 @@
-# Deployment handoff
+# Deployment
 
-The source is ready for GitHub and a static Vercel production deployment.
+## Targets
 
-## Intended targets
-
-- GitHub: `harrymakoni-netizen/raidforge`, private, branch `main`.
-- Vercel: new project `raidforge` in the connected account's default team `hjm-technologies` (`team_OwOZUFfi6SCd85S400KEvvGz`).
+- GitHub: https://github.com/harrymakoni-netizen/Raidforge (public), branch `main`.
+- Vercel: project `raidforge` in HJM Technologies (`hjm-technologies`).
 - Output: `dist/`; no install or build step. See `vercel.json`.
 - Live service: separate Node host. The static deployment supports practice mode and connecting to an HTTPS companion.
 
-## Access blockers observed
+## Vercel configuration
 
-- GitHub CLI `gh repo create ... --private` returned `Resource not accessible by integration (createRepository)`. The connected GitHub app cannot create repositories. Create an empty private repository and grant the connection access, then push the prepared source.
-- Vercel returned `403 forbidden` for the default team, requiring the connection's team grant. Complete the Vercel consent link generated in chat; it is single-use and expires after 10 minutes.
+Connect the GitHub repository to the Vercel project with the repository root as the root directory. `vercel.json` sets a static deployment, disables dependency installation and builds, and serves `dist/`. The Node server is included in GitHub for running the live companion, but is not deployed as a Vercel function.
 
-## Checks completed
+For Twitch/Codex features, deploy the companion separately, configure Twitch app credentials and Codex authentication there, and include the Vercel frontend origin in the companion’s `ALLOWED_ORIGINS`. Enter its HTTPS URL in the frontend’s Connect Twitch dialog.
+
+## Verification
 
 - `npm test`: 8 passing tests.
 - `npm run check`: JavaScript syntax checks passed.
+- Desktop and mobile browser flows passed during implementation.
 
-No GitHub repository or Vercel deployment has been created yet. The existing private Sites deployment is unchanged.
+The previous private Sites deployment remains separate and unchanged.
