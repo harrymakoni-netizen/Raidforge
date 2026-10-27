@@ -4,3 +4,7 @@ data/
 artifacts/
 *.tar.gz
 .DS_Store
+
+.vercel/
+.env.*
+!.env.example

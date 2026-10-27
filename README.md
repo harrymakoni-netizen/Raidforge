@@ -2,6 +2,12 @@
 
 **Chat builds the boss. You survive it.** A playable 2D boss arena with community-proposed attacks, Codex-generated attack programs, and monsters that travel between participating Twitch channels.
 
+## Deployment
+
+Intended GitHub repository: `harrymakoni-netizen/raidforge` (private). Repository creation is pending GitHub permission.
+
+`vercel.json` deploys `dist/` as a static frontend with no install or build step. The full Node companion stays in the repository and must run separately for live Twitch/Codex features. Configure that service’s `ALLOWED_ORIGINS` to include the deployed Vercel origin, then enter its HTTPS URL in **Connect Twitch**. This deployment does not supply Twitch credentials or repair Codex authentication.
+
 ## Run it
 
 Requires Node.js 22+, npm, and a modern browser.
