@@ -14,6 +14,8 @@ When a streamer arms a handoff and raids another participating channel, the rece
 
 During a fight, chat can vote to save or sabotage the streamer with shield, healing, and fury powers. Viewer identity limits each round to one vote per person. Creator credit stays visible on the boss and appears on the result card. Streamers can send a playable challenge link with the exact boss and rules; personal bests and downloadable scorecards make the encounter worth replaying.
 
+The fight itself has an arc: marked ground strikes become crossfire and then a frantic final phase. Close dodges build Overdrive, giving skilled players a reason to take a risk while chat decides whether to help. Visible attack warnings, a hitbox, phase breaks, and specific retry advice make the harder game learnable. These authored arena mechanics complement the Codex-generated attacks; they are not generated live.
+
 ## How Codex was used
 
 This project was built in a Codex session, including the original Canvas goose artwork, game loop, responsive workshop UI, Twitch integration, server, validation, and tests. Runtime generation also uses the Codex SDK to create structured attack programs from selected viewer proposals. Runtime generations remain pending until the streamer approves them.
@@ -32,7 +34,7 @@ Primary build session ID: **retrieve with `/status` in the build session**.
 - 0:00–0:15 — Open on the actual fight, show the stream and chat. “Chat built this boss. Now I have to survive it.”
 - 0:15–0:45 — A real viewer types `!forge`; another votes. Select it in the workshop.
 - 0:45–1:10 — Show Codex producing the program. If generation is time-compressed, explicitly label elapsed time. Preview and equip the resulting attack.
-- 1:10–1:45 — Play a short fight. Have real viewers vote `!shield` or `!fury`; show the winning power changing the battle, then the result card with creator credit.
+- 1:10–1:45 — Show the phase change and a marked strike; use a clearly labeled excerpt if the whole fight will not fit. Have real viewers vote `!shield` or `!fury`; show the winning power changing the battle, then the result card with creator credit.
 - 1:45–2:15 — Arm a handoff; perform a real raid between two connected channels. Show the receiving streamer accepting the same boss and its history.
 - 2:15–2:35 — Share a boss challenge, show it opening with the same rules, then briefly show the Codex build session and attack-validation tests.
 - 2:35–2:45 — Close: “Your community’s imagination becomes another streamer’s boss fight.”
@@ -41,7 +43,7 @@ Primary build session ID: **retrieve with `/status` in the build session**.
 
 1. Run the real Twitch and Codex flow with two accounts and fix any integration issues found.
 2. Record actual Twitch footage, including a real raid and real generation.
-3. Provide the repository URL with runnable source, assets, and setup instructions. The private Sites source repository is not a substitute for the competition's GitHub/GitLab/Bitbucket requirement; mirror it to an eligible repository.
+3. Provide the public repository URL: https://github.com/harrymakoni-netizen/Raidforge, with runnable source, assets, and setup instructions.
 4. Add the primary build session ID and an English project description.
 5. Upload the video publicly to YouTube and link it in Devpost.
 6. Submit by November 2, 2026, 2:00 PM Pacific, per the competition rules.

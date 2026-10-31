@@ -1,13 +1,13 @@
 {
   "name": "raidforge",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "private": true,
   "type": "module",
   "scripts": {
     "start": "node --env-file-if-exists=.env server/index.js",
     "dev": "node --env-file-if-exists=.env --watch server/index.js",
     "test": "node --test test/*.test.js",
-    "check": "node --check dist/app.js && node --check dist/arena.js && node --check dist/challenges.js && node --check dist/feature-ui.js && node --check server/index.js && node --check server/audience.js"
+    "check": "node --check dist/app.js && node --check dist/arena.js && node --check dist/combat.js && node --check dist/challenges.js && node --check dist/feature-ui.js && node --check server/index.js && node --check server/audience.js"
   },
   "dependencies": {
     "@openai/codex-sdk": "latest",
